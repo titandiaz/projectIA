@@ -37,11 +37,11 @@ export default {
           sortable: false,
           value: 'name'
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' }
+        { text: 'ID', value: 'calories' },
+        { text: 'Nombre', value: 'fat' },
+        { text: 'Palabras', value: 'carbs' },
+        { text: 'tweet', value: 'protein' },
+        { text: 'Puntuación', value: 'iron' }
       ],
       desserts: [
         {
@@ -155,5 +155,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 350px;
+  width: 100%;
+  margin: 0 auto;
 }
 </style>

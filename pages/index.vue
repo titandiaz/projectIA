@@ -72,7 +72,6 @@ export default {
       { icon: 'trending_up', text: 'Most Popular' },
       { icon: 'subscriptions', text: 'Subscriptions' },
       { icon: 'history', text: 'History' },
-      { icon: 'featured_play_list', text: 'Playlists' },
       { icon: 'watch_later', text: 'Watch Later' }
     ],
     items2: [

@@ -1,35 +1,44 @@
 <template>
-  <v-data-table :headers="headers" :items="desserts" class="elevation-1" item-key="name">
+  <v-data-table :headers="headers" :items="info" class="elevation-1" item-key="Usuario">
     <template slot="items" slot-scope="props">
-      <tr @click="props.expanded = !props.expanded">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
+      <tr @click="props.expanded = !props.expanded ">
+        <td>{{ props.item.Usuario }}</td>
+        <td class="text-xs-right">{{ props.item.user_id }}</td>
+        <td class="text-xs-right">{{ props.item.text }}</td>
+        <td class="text-xs-right">{{ props.item.Puntuacion_tuit }}</td>
       </tr>
     </template>
     <template slot="expand" slot-scope="props">
       <div class="container-card">
         <blockquote class="twitter-tweet" data-lang="es">
-          <p lang="en" dir="ltr">Working an application in Vue.js with TDD — An extensive guide for people who have time — part 2 <a href="https://t.co/LblVO1wKcg">https://t.co/LblVO1wKcg</a> <a href="https://twitter.com/hashtag/VueJS?src=hash&amp;ref_src=twsrc%5Etfw">#VueJS</a> <a href="https://twitter.com/hashtag/tdd?src=hash&amp;ref_src=twsrc%5Etfw">#tdd</a> <a href="https://twitter.com/hashtag/testing?src=hash&amp;ref_src=twsrc%5Etfw">#testing</a> <a href="https://twitter.com/hashtag/javascript?src=hash&amp;ref_src=twsrc%5Etfw">#javascript</a></p>&mdash; Vue.js News (@VueJsNews) <a href="https://twitter.com/VueJsNews/status/1053875276487245824?ref_src=twsrc%5Etfw">21 de octubre de 2018</a>
+        <a :href="info[props.index].status_url"></a>
         </blockquote>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-      </div class="container-card">
+      </div >
     </template>
   </v-data-table>
 </template>
 
 <script>
 import CardTwiiter from '@/components/card-twitter'
+import axios from 'axios'
 export default {
   components: {
     CardTwiiter
   },
+  props: {
+    
+  },
+  created () {
+    axios
+      .get('http://localhost:8000/tweets?word=Ecopetrol')
+      .then(response => (this.info = response.data))
+  },
   data() {
     return {
+      info: {},
+      indexTweet: 0,
       headers: [
         {
           text: 'Nick Usuario',
@@ -38,12 +47,10 @@ export default {
           value: 'name'
         },
         { text: 'ID', value: 'calories' },
-        { text: 'Nombre', value: 'fat' },
-        { text: 'Palabras', value: 'carbs' },
         { text: 'tweet', value: 'protein' },
         { text: 'Puntuación', value: 'iron' }
       ],
-      desserts: [
+      info: [
         {
           value: false,
           name: 'Frozen Yogurt',
@@ -145,6 +152,11 @@ export default {
           text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
         }
       ]
+    }
+  },
+  methods:{
+    getIndex(){
+    
     }
   }
 }

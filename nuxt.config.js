@@ -32,6 +32,7 @@ module.exports = {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    '@/assets/main.css'
   ],
 
   /*
@@ -64,6 +65,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    postcss: false,
     /*
     ** You can extend webpack config here
     */

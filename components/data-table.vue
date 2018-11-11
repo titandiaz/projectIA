@@ -5,7 +5,9 @@
         <td>{{ props.item.Usuario }}</td>
         <td class="text-xs-right">{{ props.item.user_id }}</td>
         <td class="text-xs-right">{{ props.item.text }}</td>
-        <td class="text-xs-right" >{{ props.item.Puntuacion_tuit }}</td>
+        <td class="text-xs-right neutro" v-if="props.item.Puntuacion_tuit == 0">Neutro</td>
+        <td class="text-xs-right positivo" v-else-if="props.item.Puntuacion_tuit > 0">Positivo</td>
+        <td class="text-xs-right negativo" v-else>Negativo</td>
       </tr>
     </template>
     <template slot="expand" slot-scope="props">
@@ -29,7 +31,7 @@ export default {
   props: {
     
   },
-  Created() {
+  created() {
     setTimeout( this.scoreTweets, 3000);
   },
   data() {
@@ -55,7 +57,6 @@ export default {
       if (this.$store.state.infoTwits) {
         return this.$store.state.infoTwits
       }
-      return 'why?'
     }
   },
   methods:{
@@ -87,5 +88,14 @@ export default {
   max-width: 350px;
   width: 100%;
   margin: 0 auto;
+}
+td.text-xs-right.negativo {
+  color: rgb(231, 84, 84);
+}
+.positivo {
+  color: rgb(119, 253, 119);
+}
+.negativo {
+  color: white;
 }
 </style>

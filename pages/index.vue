@@ -45,8 +45,10 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-layout row align-center style="max-width: 650px">
-        <v-text-field :append-icon-cb="() => {}" placeholder="Palabra clave..." single-line append-icon="search" color="white" hide-details></v-text-field>
+        <v-text-field :append-icon-cb="() => {}" v-model="word" @keyup.enter="getData" placeholder="Palabra clave..." single-line append-icon="search" color="white" hide-details>
+        </v-text-field>
       </v-layout>
+      
     </v-toolbar>
 
     <v-content>
@@ -62,12 +64,15 @@
 
 <script>
 import tableInfo from "@/components/data-table";
+import axios from 'axios'
 export default {
   components: {
     tableInfo
   },
   data: () => ({
     drawer: true,
+    word: '',
+    info: [],
     items: [
       { icon: 'trending_up', text: 'Most Popular' },
       { icon: 'subscriptions', text: 'Subscriptions' },
@@ -84,9 +89,28 @@ export default {
   }),
   props: {
     source: String
+  },
+  
+  methods: {
+    getData() {
+      axios
+      .get(`http://localhost:8000/tweets?word=${this.word}`)
+      .then(response => {
+        this.info = response.data
+        this.$store.commit(
+        'SET_INFO',
+        response.data)
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
+.prueba {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  cursor: pointer;
+}
 </style>

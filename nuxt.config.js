@@ -22,6 +22,10 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    baseURL:'http://localhost:8000'
+  },
 
   /*
   ** Global CSS

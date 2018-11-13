@@ -3,11 +3,12 @@
     <template slot="items" slot-scope="props">
       <tr @click="props.expanded = !props.expanded ">
         <td>{{ props.item.Usuario }}</td>
-        <td class="text-xs-right">{{ props.item.user_id }}</td>
+        <td class="text-xs-right">{{ props.item.status_id }}</td>
         <td class="text-xs-right">{{ props.item.text }}</td>
         <td class="text-xs-right neutro" v-if="props.item.Puntuacion_tuit == 0">Neutro</td>
         <td class="text-xs-right positivo" v-else-if="props.item.Puntuacion_tuit > 0">Positivo</td>
         <td class="text-xs-right negativo" v-else>Negativo</td>
+        <td class="text-xs-right" ><div class="btn-add" @click="add(props.index + 1)">Agregar</div></td>
       </tr>
     </template>
     <template slot="expand" slot-scope="props">
@@ -24,15 +25,14 @@
 
 <script>
 import CardTwiiter from '@/components/card-twitter'
+import axios from 'axios'
+
 export default {
   components: {
     CardTwiiter
   },
   props: {
     
-  },
-  created() {
-    setTimeout( this.scoreTweets, 3000);
   },
   data() {
     return {
@@ -48,7 +48,8 @@ export default {
         },
         { text: 'ID', value: 'calories' },
         { text: 'tweet', value: 'protein' },
-        { text: 'Puntuación', value: 'iron' }
+        { text: 'Puntuación', value: 'iron' },
+        { text: 'Accion', value: 'accion' }
       ],
     }
   },
@@ -60,21 +61,14 @@ export default {
     }
   },
   methods:{
-    scoreTweets(){
-      switch (this.value) {
-        case this.value > 0:
-          this.scoreMeaning = 'Positivo'
-          break;
-        case this.value < 0:
-          this.scoreMeaning = 'Negativo'
-          break;
-        case this.value == 0:
-          this.scoreMeaning = 'Neutro'        
-        default:
-          
-          break;
-
-      }
+    add(value) {
+      axios.post(`http://localhost:8000/tweets?id=${value}`)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
     }
   }
 }
@@ -97,5 +91,12 @@ td.text-xs-right.negativo {
 }
 .negativo {
   color: white;
+}
+.btn-add {
+  background-color: rgba(100, 148, 237, 0.589);
+  border: 1px solid rgb(100, 148, 237);
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 </style>

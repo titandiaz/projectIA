@@ -22,12 +22,17 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+  modules: ['@nuxtjs/axios'],
+  axios: {
+    baseURL:'http://localhost:8000'
+  },
 
   /*
   ** Global CSS
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    '@/assets/main.css'
   ],
 
   /*
@@ -60,6 +65,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    postcss: false,
     /*
     ** You can extend webpack config here
     */

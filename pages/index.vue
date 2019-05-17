@@ -15,11 +15,11 @@
         </v-list-tile>
         <v-subheader class="mt-3 grey--text text--darken-1">SUBSCRIPTIONS</v-subheader>
         <v-list>
-          <v-list-tile v-for="item in items2" :key="item.text" avatar @click="">
+          <v-list-tile v-for="item in tweets" :key="item.status_id" avatar @click="">
             <v-list-tile-avatar>
-              <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt="">
+              <img :src="item.profile_image_url" alt="">
             </v-list-tile-avatar>
-            <v-list-tile-title v-text="item.text"></v-list-tile-title>
+            <v-list-tile-title v-text="item.name"></v-list-tile-title>
           </v-list-tile>
         </v-list>
         <v-list-tile class="mt-3" @click="">
@@ -45,8 +45,10 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-layout row align-center style="max-width: 650px">
-        <v-text-field :append-icon-cb="() => {}" placeholder="Palabra clave..." single-line append-icon="search" color="white" hide-details></v-text-field>
+        <v-text-field :append-icon-cb="() => {}" v-model="word" @keyup.enter="getData" placeholder="Palabra clave..." single-line append-icon="search" color="white" hide-details>
+        </v-text-field>
       </v-layout>
+      
     </v-toolbar>
 
     <v-content>
@@ -62,12 +64,15 @@
 
 <script>
 import tableInfo from "@/components/data-table";
+import axios from 'axios'
 export default {
   components: {
     tableInfo
   },
   data: () => ({
     drawer: true,
+    word: '',
+    info: [],
     items: [
       { icon: 'trending_up', text: 'Most Popular' },
       { icon: 'subscriptions', text: 'Subscriptions' },
@@ -84,9 +89,34 @@ export default {
   }),
   props: {
     source: String
+  },
+  computed: {
+    tweets() {
+      if (this.$store.state.infoTwits) {
+        return this.$store.state.infoTwits
+      }
+    }
+  },
+  methods: {
+    getData() {
+      axios
+      .get(`http://localhost:8000/tweets?word=${this.word}`)
+      .then(response => {
+        this.info = response.data
+        this.$store.commit(
+        'SET_INFO',
+        response.data)
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
+.prueba {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  cursor: pointer;
+}
 </style>

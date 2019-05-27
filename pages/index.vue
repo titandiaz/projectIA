@@ -148,7 +148,7 @@ export default {
   methods: {
     getData() {
       axios
-        .get(`https://4f16993f.ngrok.io/tweets?word=${this.word}`)
+        .get(`https://e58cec56.ngrok.io/tweets?word=${this.word}`)
         .then(response => {
           this.info = response.data
           this.$store.commit('SET_INFO', response.data)

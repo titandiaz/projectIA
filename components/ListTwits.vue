@@ -75,7 +75,7 @@
 export default {
   data() {
     return {
-      selected: ['']
+      selected: []
     }
   },
   // methods: {
@@ -129,7 +129,7 @@ export default {
   z-index: -1;
 }
 .row:hover {
-  background-color: #f4f8f9;
+  /* background-color: #f4f8f9; */
   box-shadow: 0 0 12px 1px rgba(3, 20, 36, 0.095);
   z-index: 999;
   transform: scale(1.005);

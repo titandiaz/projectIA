@@ -1,32 +1,56 @@
 <template>
-  <v-data-table :headers="headers" :items="info" class="elevation-1" item-key="Usuario">
-    <template slot="items" slot-scope="props">
+  <v-data-table
+    :headers="headers"
+    :items="info"
+    class="elevation-1"
+    item-key="Usuario"
+  >
+    <template
+      slot="items"
+      slot-scope="props"
+    >
       <tr @click="props.expanded = !props.expanded ">
         <td>{{ props.item.Usuario }}</td>
-<<<<<<< HEAD
         <td class="text-xs-right fecha">{{ props.item.created_at.slice(0, 10) }}</td>
         <td class="text-xs-right">{{ props.item.text }}</td>
-        <td class="text-xs-right neutro" v-if="props.item.Puntuacion_tuit == 0">Neutro<br>{{props.item.Puntuacion_tuit}}</td>
-        <td class="text-xs-right positivo" v-else-if="props.item.Puntuacion_tuit > 0">Positivo<br>{{props.item.Puntuacion_tuit}}</td>
-        <td class="text-xs-right negativo" v-else>Negativo<br>{{props.item.Puntuacion_tuit}}</td>
-=======
-        <td class="text-xs-right">{{ props.item.status_id }}</td>
-        <td class="text-xs-right">{{ props.item.text }}</td>
-        <td class="text-xs-right neutro" v-if="props.item.Puntuacion_tuit == 0">Neutro</td>
-        <td class="text-xs-right positivo" v-else-if="props.item.Puntuacion_tuit > 0">Positivo</td>
-        <td class="text-xs-right negativo" v-else>Negativo</td>
->>>>>>> 95a0b287a26468aa7a607bdfbd21c443828a7af1
-        <td class="text-xs-right" ><div class="btn-add" @click="add(props.index + 1)">Agregar</div></td>
+        <td
+          class="text-xs-right neutro"
+          v-if="props.item.Puntuacion_tuit == 0"
+        >Neutro<br>{{props.item.Puntuacion_tuit}}</td>
+        <td
+          class="text-xs-right positivo"
+          v-else-if="props.item.Puntuacion_tuit > 0"
+        >Positivo<br>{{props.item.Puntuacion_tuit}}</td>
+        <td
+          class="text-xs-right negativo"
+          v-else
+        >Negativo<br>{{props.item.Puntuacion_tuit}}</td>
+        <td class="text-xs-right">
+          <div
+            class="btn-add"
+            @click="add(props.index + 1)"
+          >Agregar</div>
+        </td>
       </tr>
     </template>
-    <template slot="expand" slot-scope="props">
+    <template
+      slot="expand"
+      slot-scope="props"
+    >
       <div class="container-card">
-        <blockquote class="twitter-tweet" data-lang="es">
-        <a :href="info[props.index].status_url"></a>
+        <blockquote
+          class="twitter-tweet"
+          data-lang="es"
+        >
+          <a :href="info[props.index].status_url"></a>
         </blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
 
-      </div >
+      </div>
     </template>
   </v-data-table>
 </template>
@@ -39,9 +63,7 @@ export default {
   components: {
     CardTwiiter
   },
-  props: {
-    
-  },
+  props: {},
   data() {
     return {
       indexTweet: 0,
@@ -58,7 +80,7 @@ export default {
         { text: 'tweet', value: 'protein' },
         { text: 'Puntuación', value: 'iron' },
         { text: 'Accion', value: 'accion' }
-      ],
+      ]
     }
   },
   computed: {
@@ -68,15 +90,16 @@ export default {
       }
     }
   },
-  methods:{
+  methods: {
     add(value) {
-      axios.post(`http://localhost:8000/tweets?id=${value}`)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+      axios
+        .post(`http://localhost:8000/tweets?id=${value}`)
+        .then(function(response) {
+          console.log(response)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     }
   }
 }
@@ -94,15 +117,12 @@ export default {
 td.text-xs-right.negativo {
   color: rgb(231, 84, 84);
 }
-<<<<<<< HEAD
 td.text-xs-right.fecha {
   min-width: 120px;
 }
 td.text-xs-right {
   text-align: left !important;
 }
-=======
->>>>>>> 95a0b287a26468aa7a607bdfbd21c443828a7af1
 .positivo {
   color: rgb(119, 253, 119);
 }

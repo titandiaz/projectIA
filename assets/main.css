@@ -8,3 +8,6 @@ td.text-xs-right.negativo {
 .negativo {
   color: white;
 }
+.v-content__wrap {
+  background-color: #f4f8f9;
+}

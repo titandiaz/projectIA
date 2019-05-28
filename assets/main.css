@@ -11,3 +11,10 @@ td.text-xs-right.negativo {
 .v-content__wrap {
   background-color: #f4f8f9;
 }
+.login label.v-label.theme--light {
+  font-size: 14px;
+  color: #a0a8b6;
+}
+.login .theme--light.v-icon {
+  color: #a0a8b6;
+}

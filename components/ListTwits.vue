@@ -178,7 +178,7 @@ export default {
   background-color: transparent;
   border: 0;
   font-weight: 600;
-  color: #9aacb5;
+  color: #6a62d2;
 }
 .head:hover {
   transform: scale(1);
